@@ -8,7 +8,6 @@ mapeo = pd.read_csv("data/prd/mapeo.csv",encoding="utf-8")
 st.write(mapeo.head())
 
 
-
 # Establecer la configuración de la pantalla
 st.set_page_config(
     page_title="Filtros",
@@ -26,9 +25,9 @@ st.write('Seleccione los filtros para ver los jugadores que cumplan ese criterio
 
 
 
-position = st.selectbox("Elige tu opción:", mapeo["position"].unique().to_list())
+position = st.selectbox("Elige tu opción:", mapeo["position"].unique().tolist())
 
-role = st.selectbox("Elige tu opción:", mapeo[mapeo["position"] == position].role.unique().to_list())
+role = st.selectbox("Elige tu opción:", mapeo[mapeo["position"] == position].role.unique().tolist())
 
 if role == "Extremo":
     st.write("No sos puto")
