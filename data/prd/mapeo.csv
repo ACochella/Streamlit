@@ -1,22 +1,22 @@
-position;role
-Arquero;Muralla
-Arquero;Equilibrado
-Arquero;Trabajador
-Arquero;Sufridor
-Arquero;Playmaker
-Defensor;Equilibrado
-Defensor;Temerario
-Defensor;Caudillo
-Defensor;Atacante
-Defensor;Regular
-Mediocampista;Goleador
-Mediocampista;Lector de Juego
-Mediocampista;Box to Box
-Mediocampista;Recuperador
-Mediocampista;Pasador
-Mediocampista;Enganche
-Delantero;Killer
-Delantero;Mediapunta
-Delantero;Generador de Peligro
-Delantero;Faro del ¡rea
-Delantero;Delantero Extremo
+position,role
+Arquero,Muralla
+Arquero,Equilibrado
+Arquero,Trabajador
+Arquero,Sufridor
+Arquero,Playmaker
+Defensor,Equilibrado
+Defensor,Temerario
+Defensor,Caudillo
+Defensor,Atacante
+Defensor,Regular
+Mediocampista,Goleador
+Mediocampista,Lector de Juego
+Mediocampista,Box to Box
+Mediocampista,Recuperador
+Mediocampista,Pasador
+Mediocampista,Enganche
+Delantero,Killer
+Delantero,Mediapunta
+Delantero,Generador de Peligro
+Delantero,Faro del √Årea
+Delantero,Delantero Extremo

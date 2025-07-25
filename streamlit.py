@@ -4,7 +4,7 @@ import pandas as pd
 
 # Data
 
-mapeo = pd.read_csv("data/prd/mapeo.csv",sep=";",encoding="utf-8")
+mapeo = pd.read_csv("data/prd/mapeo.csv",encoding="utf-8")
 st.write(mapeo.head())
 
 
@@ -36,4 +36,4 @@ role = st.selectbox("Elige tu opción:", filtro_role)
 if role == "Extremo":
     st.write("No sos puto")
 else:
-    st.write("sos puto")
+    st.write("Sos puto")
