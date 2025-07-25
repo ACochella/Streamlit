@@ -25,11 +25,11 @@ st.title('Recomendador de Jugadores')
 st.write('Seleccione los filtros para ver los jugadores que cumplan ese criterio')
 
 
-filtro_position = mapeo.position.unique().to_list()
+filtro_position = mapeo["position"].unique().to_list()
 
 position = st.selectbox("Elige tu opción:", filtro_position)
 
-filtro_role = mapeo[mapeo["position"] == columna_seleccionada].role.unique().to_list()
+filtro_role = mapeo[mapeo["position"] == position].role.unique().to_list()
 
 role = st.selectbox("Elige tu opción:", filtro_role)
 
