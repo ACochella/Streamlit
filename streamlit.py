@@ -12,7 +12,6 @@ st.write(mapeo.head())
 # Establecer la configuración de la pantalla
 st.set_page_config(
     page_title="Filtros",
-    page_icon="🏠",
     layout="wide"
 )
 
@@ -25,13 +24,11 @@ st.title('Recomendador de Jugadores')
 st.write('Seleccione los filtros para ver los jugadores que cumplan ese criterio')
 
 
-filtro_position = mapeo["position"].unique().to_list()
 
-position = st.selectbox("Elige tu opción:", filtro_position)
 
-filtro_role = mapeo[mapeo["position"] == position].role.unique().to_list()
+position = st.selectbox("Elige tu opción:", mapeo["position"].unique().to_list())
 
-role = st.selectbox("Elige tu opción:", filtro_role)
+role = st.selectbox("Elige tu opción:", mapeo[mapeo["position"] == position].role.unique().to_list())
 
 if role == "Extremo":
     st.write("No sos puto")
