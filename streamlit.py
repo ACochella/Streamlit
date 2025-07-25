@@ -4,7 +4,7 @@ import pandas as pd
 
 # Data
 
-mapeo = pd.read_csv("data/prd/forwards_classification.csv",sep=";")
+mapeo = pd.read_csv("data/prd/mapeo.csv",sep=";")
 st.write(mapeo.head())
 
 
