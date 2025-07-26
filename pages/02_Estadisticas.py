@@ -1,9 +1,3 @@
-"""
-Análisis de rendimiento de los equipos de las grandes ligas europeas
-"""
-# ------------------------
-# LIBRERIAS
-# ------------------------
 import pandas as pd
 import streamlit as st
 
