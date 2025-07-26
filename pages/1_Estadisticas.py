@@ -5,9 +5,7 @@ Análisis de rendimiento de los equipos de las grandes ligas europeas
 # LIBRERIAS
 # ------------------------
 import pandas as pd
-import numpy as np
 import streamlit as st
-import streamlit.components.v1 as components
 
 # ------------------------
 # TITULOS
@@ -15,10 +13,7 @@ import streamlit.components.v1 as components
 st.title("🔎 Buscando grupos de equipos")
 st.markdown("__________")
 
-# ------------------------
-# OPCIONES
-# ------------------------
-SEED = 1234
+
 
 # ------------------------
 # LECTURA DE DATOS
