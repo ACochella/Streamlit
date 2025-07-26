@@ -24,11 +24,11 @@ st.write('Seleccione los filtros para ver los jugadores que cumplan ese criterio
 
 
 
-position = st.selectbox("Elige tu opción:", mapeo["position"].unique().tolist(),index=None)
+st.session_state.position = st.selectbox("Elige tu opción:", mapeo["position"].unique().tolist(),index=None)
 
-role = st.selectbox("Elige tu opción:", mapeo[mapeo["position"] == position].role.unique().tolist(),index=None)
+st.session_state.role = st.selectbox("Elige tu opción:", mapeo[mapeo["position"] == position].role.unique().tolist(),index=None)
 
-if role == "Extremo":
+if st.session_state.role == "Extremo":
     st.write("No sos puto")
 else:
     st.write("Sos puto")
