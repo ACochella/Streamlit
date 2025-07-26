@@ -6,17 +6,8 @@ Análisis de rendimiento de los equipos de las grandes ligas europeas
 # ------------------------
 import pandas as pd
 import numpy as np
-import json
-import seaborn as sns
-import os
-import base64
 import streamlit as st
-from IPython.core.display import HTML
-from PIL import Image
 import streamlit.components.v1 as components
-#from kneed import KneeLocator
-import plotly.express as px
-sns.set_style("ticks")
 
 # ------------------------
 # TITULOS
