@@ -22,7 +22,7 @@ st.title('Recomendador de Jugadores')
 st.write('Seleccione los filtros para ver los jugadores que cumplan ese criterio')
 
 
-stats_players = pd.read_csv('/data/prd/stats.csv', encoding='utf-8')
+stats_players = pd.read_csv('data/prd/stats.csv', encoding='utf-8')
 st.write(stats_players)
 
 st.session_state.position = st.selectbox("Elige tu opción:", mapeo["position"].unique().tolist(),index=None)
