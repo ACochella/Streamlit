@@ -26,7 +26,8 @@ if st.session_state.position == "Arquero":
     stats_role_tmp["passes_completed_90s"] = round(stats_role_tmp["passes_completed"]/stats_role_tmp["90s"],2)
 
     stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","passes_over_45m_completed_90s","defensive_actions_outside_area_90s","opponent_crosses_stopped_90s","goals_against_90s","xG_post_shoot_90s","shoots_on_target_against_90s","saves_90s","clean_sheets","passes_completed_90s"]]
-
+    st.write(stats_role)
+    
 elif st.session_state.position == "Defensor":
     metrics = ["90s","tackles_defensive_third","tackles_middle_third","tackles_offensive_third","dribblers_tackled","interceptions","errors","goals_90s","assists_90s","progressive_carries","progressive_passes","yellow_cards","red_cards","aerial_duels_won","crosses_into_penalty_area","fouls_commited","passes_completed","short_passes_completed","medium_passes_completed","passes_received"]
     stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","team","nation","age","MP","starts","minutes"] + metrics]
@@ -50,6 +51,7 @@ elif st.session_state.position == "Defensor":
     stats_role_tmp["passes_received_90s"] = round(stats_role_tmp["passes_received"]/stats_role_tmp["90s"],2)
 
     stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","interceptions_90s","errors_90s","goals_90s","assists_90s","progressive_carries_90s","progressive_passes_90s","yellow_cards_90s","red_cards_90s","aerial_duels_won_90s","crosses_into_penalty_area_90s","fouls_commited_90s","passes_completed_90s","short_passes_completed_90s","medium_passes_completed_90s","passes_received_90s"]]
+    st.write(stats_role)
 
 elif st.session_state.position == "Mediocampista":
     metrics = ["90s","interceptions","perc_dribblers_tackled","tackles_won","blocks","fouls_commited","passes_completed","perc_passes_completed","passes_into_penalty_area","passes_into_final_third","key_passes","xG_90s","xAG_90s","goals_90s","shoots_on_target_90s"]
@@ -65,6 +67,7 @@ elif st.session_state.position == "Mediocampista":
     stats_role_tmp["key_passes_90s"] = round(stats_role_tmp["key_passes"]/stats_role_tmp["90s"],2)
 
     stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","interceptions_90s","perc_dribblers_tackled","tackles_won_90s","blocks_90s","fouls_commited_90s","passes_completed_90s","perc_passes_completed","passes_into_penalty_area_90s","passes_into_final_third_90s","key_passes_90s","xG_90s","xAG_90s","goals_90s","shoots_on_target_90s"]]
+    st.write(stats_role)
 
 elif st.session_state.position == "Delantero":
     metrics = ["90s","shot_creating_actions_90s","goal_creating_actions_90s","offsides","aerial_duels_won","passes_into_final_third","passes_into_penalty_area","crosses_into_penalty_area","key_passes","carries_into_penalty_area","shoots_on_target_90s","goals_90s","assists_90s","xG_90s","xAG_90s","penalties_scored"]
@@ -80,12 +83,11 @@ elif st.session_state.position == "Delantero":
     stats_role_tmp["key_passes_90s"] = round(stats_role_tmp["key_passes"]/stats_role_tmp["90s"],2)
 
     stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","shot_creating_actions_90s","goal_creating_actions_90s","offsides_90s","aerial_duels_won_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","key_passes_90s","carries_into_penalty_area_90s","shoots_on_target_90s","goals_90s","assists_90s","xG_90s","xAG_90s","penalties_scored_90s"]]
+    st.write(stats_role)
 
 else:
     st.write("No se seleccionó tipo de jugador")
 
-stats_role = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))]
-st.write(stats_role)
 
 # ------------------------
 # GENERACION DE FILTROS
