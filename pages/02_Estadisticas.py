@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import os
+import matplotlib.pyplot as plt # type: ignore
 
 # ------------------------
 # TITULOS
@@ -87,6 +88,37 @@ elif st.session_state.position == "Delantero":
 
 else:
     st.write("No se seleccionó tipo de jugador")
+
+jugador = st.selectbox("Seleccione un jugador", stats_role["player"].unique().tolist(),index=None)
+
+col1, col2 = st.columns(2) # Esto crea dos columnas de igual ancho
+
+with col1:
+    st.write("Hola")
+
+with col2:
+    percentiles = stats_role.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1).set_index('player')
+    percentiles = percentiles.rank(pct=True).multiply(100).round(1)
+
+    # Gráfico para el jugador seleccionado
+    valores = percentiles.loc[jugador]
+
+    # Matplotlib dentro de Streamlit
+    fig, ax = plt.subplots(figsize=(8, 5))
+    valores.plot(kind='bar', color='mediumseagreen', edgecolor='black', ax=ax)
+    ax.set_title(f"Percentiles de {jugador}")
+    ax.set_ylabel("Percentil")
+    ax.set_ylim(0, 100)
+    ax.grid(axis='y', linestyle='--', alpha=0.7)
+    ax.set_xticklabels(valores.index, rotation=0)
+
+    # Etiquetas sobre las barras
+    for i, v in enumerate(valores):
+        ax.text(i, v + 2, f'{v}%', ha='center', fontweight='bold')
+
+    st.pyplot(fig)
+
+
 
 
 # ------------------------
