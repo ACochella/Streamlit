@@ -110,7 +110,7 @@ with col2:
     ax.set_ylabel("Percentil")
     ax.set_ylim(0, 100)
     ax.grid(axis='y', linestyle='--', alpha=0.7)
-    ax.set_xticklabels(valores.index, rotation=0)
+    ax.set_xticklabels(valores.index, rotation=90)
 
     # Etiquetas sobre las barras
     for i, v in enumerate(valores):
