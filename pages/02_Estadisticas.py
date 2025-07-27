@@ -16,7 +16,7 @@ stats_players = pd.read_csv(ruta_csv, encoding='utf-8')
 
 st.write(st.session_state.position + " " +st.session_state.role)
 
-stats_role = stats_players[stats_players["classification"] == st.session_state.position + " " +st.session_state.role]
+stats_role = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))]
 st.write(stats_role)
 
 # ------------------------
