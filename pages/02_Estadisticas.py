@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import os
 
 # ------------------------
 # TITULOS
@@ -9,14 +10,13 @@ st.markdown("__________")
 
 
 
-# ------------------------
-# LECTURA DE DATOS
-# ------------------------
-stats_players = pd.read_csv('../data/prd/stats.csv', encoding='utf-8')
+ruta_base = os.path.dirname(__file__)
+ruta_csv = os.path.join(ruta_base, '..', 'data', 'prd', 'stats.csv')
+stats_players = pd.read_csv(ruta_csv, encoding='utf-8')
 
-st.write(st.session_state.position)
+st.write(st.session_state.position + " " +st.session_state.role)
 
-stats_role = stats_players[stats_players["classification"] == st.session_state.position + st.session_state.role]
+stats_role = stats_players[stats_players["classification"] == st.session_state.position + " " +st.session_state.role]
 st.write(stats_role)
 
 # ------------------------
