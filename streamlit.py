@@ -29,7 +29,7 @@ role = st.selectbox("Elige el rol:", mapeo[mapeo["position"] == position].role.u
 
 st.session_state.role = role
 
-valor_mercado = st.slider("Valor de mercado:", min_value=0, max_value=250,value=(0, 250))
+valor_mercado = st.slider("Valor de mercado:", min_value=0, max_value=250,value=(0, 250), step=0.5)
 
 # Extraer los límites del rango seleccionado por el usuario
 st.session_state.min_filtro = valor_mercado[0]
