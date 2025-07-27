@@ -25,7 +25,7 @@ if st.session_state.position == "Arquero":
     stats_role_tmp["saves_90s"] = round(stats_role_tmp["saves"]/stats_role_tmp["90s"],2)
     stats_role_tmp["passes_completed_90s"] = round(stats_role_tmp["passes_completed"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","passes_over_45m_completed_90s","defensive_actions_outside_area_90s","opponent_crosses_stopped_90s","goals_against_90s","xG_post_shoot_90s","shoots_on_target_against_90s","saves_90s","clean_sheets","passes_completed_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","passes_over_45m_completed_90s","defensive_actions_outside_area_90s","opponent_crosses_stopped_90s","goals_against_90s","xG_post_shoot_90s","shoots_on_target_against_90s","saves_90s","clean_sheets","passes_completed_90s"]]
     st.write(stats_role)
 
 elif st.session_state.position == "Defensor":
@@ -50,7 +50,7 @@ elif st.session_state.position == "Defensor":
     stats_role_tmp["medium_passes_completed_90s"] = round(stats_role_tmp["medium_passes_completed"]/stats_role_tmp["90s"],2)
     stats_role_tmp["passes_received_90s"] = round(stats_role_tmp["passes_received"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","interceptions_90s","errors_90s","goals_90s","assists_90s","progressive_carries_90s","progressive_passes_90s","yellow_cards_90s","red_cards_90s","aerial_duels_won_90s","crosses_into_penalty_area_90s","fouls_commited_90s","passes_completed_90s","short_passes_completed_90s","medium_passes_completed_90s","passes_received_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","interceptions_90s","errors_90s","goals_90s","assists_90s","progressive_carries_90s","progressive_passes_90s","yellow_cards_90s","red_cards_90s","aerial_duels_won_90s","crosses_into_penalty_area_90s","fouls_commited_90s","passes_completed_90s","short_passes_completed_90s","medium_passes_completed_90s","passes_received_90s"]]
     st.write(stats_role)
 
 elif st.session_state.position == "Mediocampista":
@@ -66,7 +66,7 @@ elif st.session_state.position == "Mediocampista":
     stats_role_tmp["passes_into_penalty_area_90s"] = round(stats_role_tmp["passes_into_penalty_area"]/stats_role_tmp["90s"],2)
     stats_role_tmp["key_passes_90s"] = round(stats_role_tmp["key_passes"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","interceptions_90s","perc_dribblers_tackled","tackles_won_90s","blocks_90s","fouls_commited_90s","passes_completed_90s","perc_passes_completed","passes_into_penalty_area_90s","passes_into_final_third_90s","key_passes_90s","xG_90s","xAG_90s","goals_90s","shoots_on_target_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","interceptions_90s","perc_dribblers_tackled","tackles_won_90s","blocks_90s","fouls_commited_90s","passes_completed_90s","perc_passes_completed","passes_into_penalty_area_90s","passes_into_final_third_90s","key_passes_90s","xG_90s","xAG_90s","goals_90s","shoots_on_target_90s"]]
     st.write(stats_role)
 
 elif st.session_state.position == "Delantero":
@@ -82,7 +82,7 @@ elif st.session_state.position == "Delantero":
     stats_role_tmp["passes_into_penalty_area_90s"] = round(stats_role_tmp["passes_into_penalty_area"]/stats_role_tmp["90s"],2)
     stats_role_tmp["key_passes_90s"] = round(stats_role_tmp["key_passes"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","shot_creating_actions_90s","goal_creating_actions_90s","offsides_90s","aerial_duels_won_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","key_passes_90s","carries_into_penalty_area_90s","shoots_on_target_90s","goals_90s","assists_90s","xG_90s","xAG_90s","penalties_scored_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","shot_creating_actions_90s","goal_creating_actions_90s","offsides_90s","aerial_duels_won_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","key_passes_90s","carries_into_penalty_area_90s","shoots_on_target_90s","goals_90s","assists_90s","xG_90s","xAG_90s","penalties_scored_90s"]]
     st.write(stats_role)
 
 else:
