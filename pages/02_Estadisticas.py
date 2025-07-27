@@ -16,7 +16,7 @@ stats_players = pd.read_csv(ruta_csv, encoding='utf-8')
 
 if st.session_state.position == "Arquero":
     metrics = ["90s","passes_over_45m_completed","perc_passes_over_45m","defensive_actions_outside_area_90s","opponent_crosses_stopped","perc_crosses_stopped","goals_against_90s","xG_post_shoot","shoots_on_target_against","saves","clean_sheets","passes_completed","perc_passes_completed"]
-    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","team","nation","age","MP","starts","minutes" + metrics]]
+    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][[["player","team","nation","age","MP","starts","minutes"] + metrics]]
     
     stats_role_tmp["passes_over_45m_completed_90s"] = round(stats_role_tmp["passes_over_45m_completed"]/stats_role_tmp["90s"],2)
     stats_role_tmp["opponent_crosses_stopped_90s"] = round(stats_role_tmp["opponent_crosses_stopped"]/stats_role_tmp["90s"],2)
@@ -29,7 +29,7 @@ if st.session_state.position == "Arquero":
 
 elif st.session_state.position == "Defensor":
     metrics = ["90s","tackles_defensive_third","tackles_middle_third","tackles_offensive_third","dribblers_tackled","interceptions","errors","goals_90s","assists_90s","progressive_carries","progressive_passes","yellow_cards","red_cards","aerial_duels_won","crosses_into_penalty_area","fouls_commited","passes_completed","short_passes_completed","medium_passes_completed","passes_received"]
-    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","team","nation","age","MP","starts","minutes" + metrics]]
+    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][[["player","team","nation","age","MP","starts","minutes"] + metrics]]
     
     stats_role_tmp["tackles_defensive_third_90s"] = round(stats_role_tmp["tackles_defensive_third"]/stats_role_tmp["90s"],2)
     stats_role_tmp["tackles_middle_third_90s"] = round(stats_role_tmp["tackles_middle_third"]/stats_role_tmp["90s"],2)
@@ -53,7 +53,7 @@ elif st.session_state.position == "Defensor":
 
 elif st.session_state.position == "Mediocampista":
     metrics = ["90s","interceptions","perc_dribblers_tackled","tackles_won","blocks","fouls_commited","passes_completed","perc_passes_completed","passes_into_penalty_area","passes_into_final_third","key_passes","xG_90s","xAG_90s","goals_90s","shoots_on_target_90s"]
-    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","team","nation","age","MP","starts","minutes" + metrics]]
+    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][[["player","team","nation","age","MP","starts","minutes"] + metrics]]
     
     stats_role_tmp["interceptions_90s"] = round(stats_role_tmp["interceptions"]/stats_role_tmp["90s"],2)
     stats_role_tmp["tackles_won_90s"] = round(stats_role_tmp["tackles_won"]/stats_role_tmp["90s"],2)
@@ -68,7 +68,7 @@ elif st.session_state.position == "Mediocampista":
 
 elif st.session_state.position == "Delantero":
     metrics = ["90s","shot_creating_actions_90s","goal_creating_actions_90s","offsides","aerial_duels_won","passes_into_final_third","passes_into_penalty_area","crosses_into_penalty_area","key_passes","carries_into_penalty_area","shoots_on_target_90s","goals_90s","assists_90s","xG_90s","xAG_90s","penalties_scored"]
-    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","team","nation","age","MP","starts","minutes" + metrics]]
+    stats_role_tmp = stats_players[(stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][[["player","team","nation","age","MP","starts","minutes"] + metrics]]
     
     stats_role_tmp["offsides_90s"] = round(stats_role_tmp["offsides"]/stats_role_tmp["90s"],2)
     stats_role_tmp["aerial_duels_won_90s"] = round(stats_role_tmp["aerial_duels_won"]/stats_role_tmp["90s"],2)
