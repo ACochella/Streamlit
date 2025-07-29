@@ -92,7 +92,7 @@ else:
 
 jugador = st.selectbox("Seleccione un jugador", stats_role_tmp["player"].unique().tolist(),index=None)
 
-percentiles = stats_role_tmp.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1).set_index('player')
+percentiles = stats_role.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1)
 percentiles = percentiles.rank(pct=True).multiply(100).round(1)
 st.write(percentiles)
 valores = percentiles.loc[jugador]
@@ -104,7 +104,7 @@ with col1:
     if jugador is not None:
         valores = percentiles.loc[jugador]
 
-        metricas_posibles = valores.columns.tolist()
+        metricas_posibles = percentiles.columns.tolist()
         metricas_destacadas = []
 
         for metrica in metricas_posibles:
