@@ -95,14 +95,14 @@ jugador = st.selectbox("Seleccione un jugador", stats_role_tmp["player"].unique(
 percentiles = stats_role.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1)
 percentiles = percentiles.rank(pct=True).multiply(100).round(1)
 st.write(percentiles)
-valores = percentiles.loc[jugador]
+valores = percentiles.loc[[jugador]]
 st.write(valores)
 
 col1, col2 = st.columns(2) # Esto crea dos columnas de igual ancho
 
 with col1:
     if jugador is not None:
-        valores = percentiles.loc[jugador]
+        valores = percentiles.loc[[jugador]]
 
         metricas_posibles = percentiles.columns.tolist()
         metricas_destacadas = []
