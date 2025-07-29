@@ -92,7 +92,7 @@ else:
 
 jugador = st.selectbox("Seleccione un jugador", stats_role_tmp["player"].unique().tolist(),index=None)
 
-percentiles = stats_role.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1).set_index('player')
+percentiles = stats_role_tmp.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1).set_index('player')
 percentiles = percentiles.rank(pct=True).multiply(100).round(1)
 
 col1, col2 = st.columns(2) # Esto crea dos columnas de igual ancho
