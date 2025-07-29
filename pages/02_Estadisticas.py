@@ -117,7 +117,7 @@ with col1:
 
             for ax, metrica in zip(axes, metricas_destacadas):
                 sns.boxplot(data=stats_role, y=metrica, ax=ax, color='lightgray')
-                ax.scatter(x=0, y=valores[metrica], color='red', zorder=5)
+                ax.scatter(x=0, y=stats_role[metrica], color='red', zorder=5)
                 ax.set_title(f"Métrica destacada de {jugador}: {metrica.replace('_', ' ').capitalize()}")
                 ax.legend()
 
