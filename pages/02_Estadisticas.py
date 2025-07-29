@@ -118,7 +118,7 @@ with col1:
             for ax, metrica in zip(axes, metricas_destacadas):
                 sns.boxplot(data=percentiles, y=metrica, ax=ax, color='lightgray')
                 ax.scatter(x=0, y=valores[metrica], color='red', zorder=5)
-                ax.set_title(metrica.replace("_", " ").capitalize())
+                ax.set_title(metrica.replace("_", " ").capitalize() + " - Rendimiento de " + {jugador})
                 ax.legend()
 
             plt.tight_layout()
