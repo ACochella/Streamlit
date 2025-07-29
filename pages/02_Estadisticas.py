@@ -101,7 +101,7 @@ with col1:
     if jugador is not None:
         valores = percentiles.loc[jugador]
 
-        metricas_posibles = valores.columns
+        metricas_posibles = valores.columns.tolist()
         metricas_destacadas = []
 
         for metrica in metricas_posibles:
