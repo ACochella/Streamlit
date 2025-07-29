@@ -99,7 +99,7 @@ col1, col2 = st.columns(2) # Esto crea dos columnas de igual ancho
 
 with col1:
     if jugador is not None:
-        valores = stats_role.loc[[jugador]]
+        valores = percentiles.loc[[jugador]]
 
         metricas_posibles = percentiles.columns.tolist()
         metricas_destacadas = []
@@ -116,7 +116,7 @@ with col1:
                 axes = [axes]  # para que se pueda iterar igual
 
             for ax, metrica in zip(axes, metricas_destacadas):
-                sns.boxplot(data=percentiles, y=metrica, ax=ax, color='lightgray')
+                sns.boxplot(data=stats_role, y=metrica, ax=ax, color='lightgray')
                 ax.scatter(x=0, y=valores[metrica], color='red', zorder=5)
                 ax.set_title(f"Métrica destacada de {jugador}: {metrica.replace('_', ' ').capitalize()}")
                 ax.legend()
