@@ -99,7 +99,7 @@ col1, col2 = st.columns(2) # Esto crea dos columnas de igual ancho
 
 with col1:
     if jugador is not None:
-        valores = percentiles.loc[[jugador]]
+        valores = stats_role.loc[[jugador]]
 
         metricas_posibles = percentiles.columns.tolist()
         metricas_destacadas = []
