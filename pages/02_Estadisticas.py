@@ -120,8 +120,8 @@ with col1:
                 ax.scatter(x=0, y=valores[metrica], color='red', zorder=5)
                 ax.legend()
 
+            fig.subplots_adjust(top=0.93)
             fig.suptitle("Rendimiento del jugador", fontsize=16)
-            plt.tight_layout(rect=[0, 0, 1, 0.95])
             st.pyplot(fig)
         else:
             st.info("Este jugador no supera el percentil 80 en ninguna métrica.")
