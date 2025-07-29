@@ -118,9 +118,9 @@ with col1:
             for ax, metrica in zip(axes, metricas_destacadas):
                 sns.boxplot(data=percentiles, y=metrica, ax=ax, color='lightgray')
                 ax.scatter(x=0, y=valores[metrica], color='red', zorder=5)
+                ax.set_title(f"Métricas destacadas de {jugador}")
                 ax.legend()
             
-            ax.set_title(f"Métricas destacadas de {jugador}")
             plt.tight_layout()
             st.pyplot(fig)
         else:
