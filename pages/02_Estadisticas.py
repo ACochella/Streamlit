@@ -118,10 +118,10 @@ with col1:
             for ax, metrica in zip(axes, metricas_destacadas):
                 sns.boxplot(data=percentiles, y=metrica, ax=ax, color='lightgray')
                 ax.scatter(x=0, y=valores[metrica], color='red', zorder=5)
+                ax.set_title(f"Métrica destacada de {jugador}: {metrica.replace('_', ' ').capitalize()}")
                 ax.legend()
 
-            fig.subplots_adjust(top=0.93)
-            fig.suptitle("Rendimiento del jugador", fontsize=16)
+            plt.tight_layout()
             st.pyplot(fig)
         else:
             st.info("Este jugador no supera el percentil 80 en ninguna métrica.")
