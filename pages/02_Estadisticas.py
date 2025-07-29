@@ -2,11 +2,12 @@ import pandas as pd
 import streamlit as st
 import os
 import matplotlib.pyplot as plt # type: ignore
+import seaborn as sns # type: ignore
 
 # ------------------------
 # TITULOS
 # ------------------------
-st.title("Estadisticas de los jugadorea en cada rol")
+st.title("Estadisticas de los jugadores en cada rol")
 st.markdown("__________")
 
 
@@ -26,7 +27,7 @@ if st.session_state.position == "Arquero":
     stats_role_tmp["saves_90s"] = round(stats_role_tmp["saves"]/stats_role_tmp["90s"],2)
     stats_role_tmp["passes_completed_90s"] = round(stats_role_tmp["passes_completed"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","passes_over_45m_completed_90s","defensive_actions_outside_area_90s","opponent_crosses_stopped_90s","goals_against_90s","xG_post_shoot_90s","shoots_on_target_against_90s","saves_90s","clean_sheets","passes_completed_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","passes_over_45m_completed_90s","defensive_actions_outside_area_90s","opponent_crosses_stopped_90s","goals_against_90s","xG_post_shoot_90s","shoots_on_target_against_90s","saves_90s","clean_sheets","passes_completed_90s"]].set_index('player')
     st.write(stats_role)
 
 elif st.session_state.position == "Defensor":
@@ -51,7 +52,7 @@ elif st.session_state.position == "Defensor":
     stats_role_tmp["medium_passes_completed_90s"] = round(stats_role_tmp["medium_passes_completed"]/stats_role_tmp["90s"],2)
     stats_role_tmp["passes_received_90s"] = round(stats_role_tmp["passes_received"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","interceptions_90s","errors_90s","goals_90s","assists_90s","progressive_carries_90s","progressive_passes_90s","yellow_cards_90s","red_cards_90s","aerial_duels_won_90s","crosses_into_penalty_area_90s","fouls_commited_90s","passes_completed_90s","short_passes_completed_90s","medium_passes_completed_90s","passes_received_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","interceptions_90s","errors_90s","goals_90s","assists_90s","progressive_carries_90s","progressive_passes_90s","yellow_cards_90s","red_cards_90s","aerial_duels_won_90s","crosses_into_penalty_area_90s","fouls_commited_90s","passes_completed_90s","short_passes_completed_90s","medium_passes_completed_90s","passes_received_90s"]].set_index('player')
     st.write(stats_role)
 
 elif st.session_state.position == "Mediocampista":
@@ -67,7 +68,7 @@ elif st.session_state.position == "Mediocampista":
     stats_role_tmp["passes_into_penalty_area_90s"] = round(stats_role_tmp["passes_into_penalty_area"]/stats_role_tmp["90s"],2)
     stats_role_tmp["key_passes_90s"] = round(stats_role_tmp["key_passes"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","interceptions_90s","perc_dribblers_tackled","tackles_won_90s","blocks_90s","fouls_commited_90s","passes_completed_90s","perc_passes_completed","passes_into_penalty_area_90s","passes_into_final_third_90s","key_passes_90s","xG_90s","xAG_90s","goals_90s","shoots_on_target_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","interceptions_90s","perc_dribblers_tackled","tackles_won_90s","blocks_90s","fouls_commited_90s","passes_completed_90s","perc_passes_completed","passes_into_penalty_area_90s","passes_into_final_third_90s","key_passes_90s","xG_90s","xAG_90s","goals_90s","shoots_on_target_90s"]].set_index('player')
     st.write(stats_role)
 
 elif st.session_state.position == "Delantero":
@@ -83,40 +84,82 @@ elif st.session_state.position == "Delantero":
     stats_role_tmp["passes_into_penalty_area_90s"] = round(stats_role_tmp["passes_into_penalty_area"]/stats_role_tmp["90s"],2)
     stats_role_tmp["key_passes_90s"] = round(stats_role_tmp["key_passes"]/stats_role_tmp["90s"],2)
 
-    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","shot_creating_actions_90s","goal_creating_actions_90s","offsides_90s","aerial_duels_won_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","key_passes_90s","carries_into_penalty_area_90s","shoots_on_target_90s","goals_90s","assists_90s","xG_90s","xAG_90s","penalties_scored_90s"]]
+    stats_role = stats_role_tmp[["player","team","nation","age","MP","starts","minutes","market_value_millions","shot_creating_actions_90s","goal_creating_actions_90s","offsides_90s","aerial_duels_won_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","key_passes_90s","carries_into_penalty_area_90s","shoots_on_target_90s","goals_90s","assists_90s","xG_90s","xAG_90s","penalties_scored_90s"]].set_index('player')
     st.write(stats_role)
 
 else:
     st.write("No se seleccionó tipo de jugador")
 
-jugador = st.selectbox("Seleccione un jugador", stats_role["player"].unique().tolist(),index=None)
+jugador = st.selectbox("Seleccione un jugador", stats_role_tmp["player"].unique().tolist(),index=None)
+
+percentiles = stats_role.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1).set_index('player')
+percentiles = percentiles.rank(pct=True).multiply(100).round(1)
 
 col1, col2 = st.columns(2) # Esto crea dos columnas de igual ancho
 
 with col1:
-    st.write("Hola")
+    if jugador is not None:
+        valores = percentiles.loc[jugador]
+
+        metricas_posibles = valores.columns
+        metricas_destacadas = []
+
+        for metrica in metricas_posibles:
+            valor_jugador = valores[metrica].values[0]
+            if valor_jugador >= 80:
+                metricas_destacadas.append(metrica)
+        # Gráfico solo si hay métricas destacadas
+        if metricas_destacadas:
+            fig, axes = plt.subplots(nrows=len(metricas_destacadas), figsize=(6, 4 * len(metricas_destacadas)))
+
+            if len(metricas_destacadas) == 1:
+                axes = [axes]  # para que se pueda iterar igual
+
+            for ax, metrica in zip(axes, metricas_destacadas):
+                sns.boxplot(data=percentiles, y=metrica, ax=ax, color='lightgray')
+                ax.scatter(x=0, y=valores[metrica], color='red', label=jugador, zorder=5)
+                ax.set_title(metrica.replace("_", " ").capitalize())
+                ax.legend()
+
+            plt.tight_layout()
+            st.pyplot(fig)
+        else:
+            st.info("Este jugador no supera el percentil 80 en ninguna métrica.")
+    else:
+        st.warning("Seleccioná un jugador para ver su gráfico de percentiles.")
 
 with col2:
-    percentiles = stats_role.drop(["team","nation","age","MP","starts","minutes","market_value_millions"], axis=1).set_index('player')
-    percentiles = percentiles.rank(pct=True).multiply(100).round(1)
+    if jugador is not None:
 
-    # Gráfico para el jugador seleccionado
-    valores = percentiles.loc[jugador]
+        # Gráfico para el jugador seleccionado
+        valores = percentiles.loc[jugador]
 
-    # Matplotlib dentro de Streamlit
-    fig, ax = plt.subplots(figsize=(8, 5))
-    valores.plot(kind='bar', color='mediumseagreen', edgecolor='black', ax=ax)
-    ax.set_title(f"Percentiles de {jugador}")
-    ax.set_ylabel("Percentil")
-    ax.set_ylim(0, 100)
-    ax.grid(axis='y', linestyle='--', alpha=0.7)
-    ax.set_xticklabels(valores.index, rotation=90)
+        # Asignamos color según percentil
+        colores = []
+        for v in valores:
+            if v < 40:
+                colores.append('red')
+            elif v <= 80:
+                colores.append('gold')
+            else:
+                colores.append('green')
 
-    # Etiquetas sobre las barras
-    for i, v in enumerate(valores):
-        ax.text(i, v + 2, f'{v}%', ha='center', fontweight='bold')
+        # Matplotlib dentro de Streamlit
+        fig, ax = plt.subplots(figsize=(8, 5))
+        valores.plot(kind='bar', color=colores, edgecolor='black', ax=ax)
+        ax.set_title(f"Percentiles de {jugador}")
+        ax.set_ylabel("Percentil")
+        ax.set_ylim(0, 100)
+        ax.grid(axis='y', linestyle='--', alpha=0.7)
+        ax.set_xticklabels(valores.index, rotation=90)
 
-    st.pyplot(fig)
+        # Etiquetas sobre las barras
+        for i, v in enumerate(valores):
+            ax.text(i, v + 2, f'{v}%', ha='center', fontweight='bold')
+
+        st.pyplot(fig)
+    else:
+        st.warning("Seleccioná un jugador para ver su gráfico de percentiles.")
 
 
 
