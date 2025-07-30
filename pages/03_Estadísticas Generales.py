@@ -29,7 +29,7 @@ defense_metrics = ["yellow_cards","red_cards","tackles_won","tackles_defensive_t
 goalkeeper_metrics_1 = ["goals_against_90s","shoots_on_target_against","xG_post_shoot","xG_post_shoot_over_shoot_on_target","defensive_actions_outside_area_90s"]
 goalkeeper_metrics_2 = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
 
-df_attack = normalizar_por_90s(st.session_state.stats_players[["player"] + attack_metrics])
+df_attack = normalizar_por_90s(st.session_state.stats_players[["player","90s"] + attack_metrics])
 st.write(df_attack)
 
 
