@@ -22,6 +22,35 @@ def normalizar_por_90s(df):
 
     return df_filtrado
 
+def radar_chart(df, jugadores, metricas, titulo):
+
+    # Filtrar el DataFrame por jugadores y métricas
+    df_filtrado = df[df["player"].isin(jugadores)][["player"] + metricas]
+
+    # Ángulos del radar
+    num_vars = len(metricas)
+    angles = [n / float(num_vars) * 2 * pi for n in range(num_vars)]
+    angles += angles[:1]  # Cierre del círculo
+
+    # Crear gráfico
+    fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+
+    # Dibujar una línea para cada jugador
+    for i, row in df_filtrado.iterrows():
+        valores = row[metricas].tolist()
+        valores += valores[:1]
+        ax.plot(angles, valores, label=row["player"])
+        ax.fill(angles, valores, alpha=0.1)
+
+    # Estética
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels([m.replace("_", " ").capitalize() for m in metricas])
+    ax.set_title(titulo, y=1.08)
+    ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
+
+    # Mostrar en Streamlit
+    st.pyplot(fig)
+
 
 attack_metrics = ["goals_90s","assists_90s","goals_no_penalty_kicks_90s","xG_90s","xAG_90s","no_penalty_xG_90s","progressive_carries","progressive_passes","progressive_passes_received","shot_creating_actions_90s","play_passes_to_shot","goal_creating_actions_90s","play_passes_to_goal","offsides","passes_completed","perc_passes_completed","shoots_on_target_90s","short_passes_completed","perc_short_passes_completed","medium_passes_completed","perc_medium_passes_completed","key_passes","passes_into_final_third","passes_into_penalty_area","crosses_into_penalty_area","switches_passes","carries_into_ofe_third","carries_into_penalty_area","miscontrols","passes_received"]
 defense_metrics = ["yellow_cards","red_cards","tackles_won","tackles_defensive_third","tackles_middle_third","tackles_offensive_third","dribblers_tackled","perc_dribblers_tackled","blocks","shots_blocked","passes_blocked","interceptions","tackles_and_interceptions","clearances","errors","second_yellow_card_expulsions","fouls_commited","aerial_duels_won","perc_aerial_duels_won","penalty_kicks_conceded"]
@@ -46,33 +75,9 @@ with col1:
         st.info("Por favor seleccioná las métricas a considerar.")
     elif not jugadores1:
         st.info("Selecciona los jugadores a comparar.")
-    else:
-        jugador = 'Jugador 1'
-        valores = df_attack.loc[jugadores1, metricas1]
-        
-        #for metrica in metricas:
-        #    min_val = df[metrica].min()
-        #    max_val = df[metrica].max()
-        #    data_norm[metrica] = 100 * (data[metrica] - min_val) / (max_val - min_val)
 
-        num_vars = len(metricas1)
-        angles = [n / float(num_vars) * 2 * pi for n in range(num_vars)]
-        angles += angles[:1]
+    radar_chart(df_attack, jugadores1, metricas1, "Comparativa de jugadores en ataque")
 
-        fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
-        
-        for i, row in valores.iterrows():
-            valores = row[metricas1].tolist()
-            valores += valores[:1]
-            ax.plot(angles, valores, label=row["player"])
-            ax.fill(angles, valores, alpha=0.1)
-
-        ax.set_xticks(angles[:-1])
-        ax.set_xticklabels([m.replace("_", " ").capitalize() for m in metricas1])
-        ax.set_title("Comparativa métricas de ataque", y=1.08)
-        ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
-
-        st.pyplot(fig)
 
 # ----- COLUMNA 2 -----
 with col2:
