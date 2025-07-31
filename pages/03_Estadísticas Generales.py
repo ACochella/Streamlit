@@ -68,28 +68,30 @@ goalkeeper_metrics_1_cleaned = ["goals_against_90s","shoots_on_target_against_90
 goalkeeper_metrics_2_cleaned = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
 
 
+jugadores = st.multiselect("Seleccioná jugadores", options=df_attack["player"].unique().tolist(), default=None, key="jugadores")
+
 col1, col2 = st.columns(2)
 
 with col1:
-    jugadores1 = st.multiselect("Seleccioná jugadores", options=df_attack["player"].unique().tolist(), default=None, key="jugadores1")
+    #jugadores1 = st.multiselect("Seleccioná jugadores", options=df_attack["player"].unique().tolist(), default=None, key="jugadores1")
     metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics_cleaned, default=None, key="metricas1")
     
     if not metricas1:
         st.info("Por favor seleccioná las métricas a considerar.")
-    elif not jugadores1:
+    elif not jugadores:
         st.info("Selecciona los jugadores a comparar.")
 
-    radar_chart(df_attack, jugadores1, metricas1, "Comparativa de jugadores en ataque")
+    radar_chart(df_attack, jugadores, metricas1, "Comparativa de jugadores en ataque")
 
 
 # ----- COLUMNA 2 -----
 with col2:
-    jugadores2 = st.multiselect("Seleccioná jugadores", options=df_defense["player"].unique().tolist(), default=None, key="jugadores2")
+    #jugadores2 = st.multiselect("Seleccioná jugadores", options=df_defense["player"].unique().tolist(), default=None, key="jugadores2")
     metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics_cleaned, default=None, key="metricas2")
     
     if not metricas2:
         st.info("Por favor seleccioná las métricas a considerar.")
-    elif not jugadores2:
+    elif not jugadores:
         st.info("Selecciona los jugadores a comparar.")
 
-    radar_chart(df_defense, jugadores1, metricas1, "Comparativa de jugadores en defensa")
+    radar_chart(df_defense, jugadores, metricas2, "Comparativa de jugadores en defensa")
