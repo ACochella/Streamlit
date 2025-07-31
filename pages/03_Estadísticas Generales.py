@@ -27,30 +27,24 @@ goalkeeper_metrics_1 = ["goals_against_90s","shoots_on_target_against","xG_post_
 goalkeeper_metrics_2 = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
 
 df_attack = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + attack_metrics])
-st.write(df_attack)
-
 df_defense = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + defense_metrics])
-st.write(df_defense)
-
 df_gk_1 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_1])
-st.write(df_gk_1)
-
 df_gk_2 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_2])
-st.write(df_gk_2)
 
 
-"""
+
+
 col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("Jugador 1")
-    metricas1 = st.multiselect("Seleccioná métricas", options=metricas_disponibles, default=None, key="metricas1")
+    metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics, default=None, key="metricas1")
     
     if not metricas1:
         st.info("Por favor seleccioná las métricas a considerar.")
     else:
         jugador = 'Jugador 1'
-        valores = df.loc[jugador, metricas1].values.tolist()
+        valores = df_attack.loc[jugador, metricas1].values.tolist()
         
         fig = go.Figure()
         fig.add_trace(go.Scatterpolar(
@@ -68,13 +62,13 @@ with col1:
 # ----- COLUMNA 2 -----
 with col2:
     st.subheader("Jugador 2")
-    metricas2 = st.multiselect("Seleccioná métricas", options=metricas_disponibles, default=None, key="metricas2")
+    metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics, default=None, key="metricas2")
     
     if not metricas2:
         st.info("Por favor seleccioná las métricas a considerar.")
     else:
         jugador = 'Jugador 2'
-        valores = df.loc[jugador, metricas2].values.tolist()
+        valores = df_defense.loc[jugador, metricas2].values.tolist()
         
         fig = go.Figure()
         fig.add_trace(go.Scatterpolar(
@@ -88,4 +82,3 @@ with col2:
             showlegend=True
         )
         st.plotly_chart(fig, use_container_width=True)
-        """
