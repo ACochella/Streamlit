@@ -84,24 +84,12 @@ with col1:
 
 # ----- COLUMNA 2 -----
 with col2:
-    st.subheader("Jugador 2")
-    metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics, default=None, key="metricas2")
+    jugadores2 = st.multiselect("Seleccioná jugadores", options=df_defense["player"].unique().tolist(), default=None, key="jugadores2")
+    metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics_cleaned, default=None, key="metricas2")
     
     if not metricas2:
         st.info("Por favor seleccioná las métricas a considerar.")
-    else:
-        jugador = 'Jugador 2'
-        valores = df_defense.loc[jugador, metricas2].values.tolist()
-        
-        fig = go.Figure()
-        fig.add_trace(go.Scatterpolar(
-            r=valores,
-            theta=[m.replace('_', ' ').capitalize() for m in metricas2],
-            fill='toself',
-            name=jugador
-        ))
-        fig.update_layout(
-            polar=dict(radialaxis=dict(visible=True)),
-            showlegend=True
-        )
-        st.plotly_chart(fig, use_container_width=True)
+    elif not jugadores2:
+        st.info("Selecciona los jugadores a comparar.")
+
+    radar_chart(df_defense, jugadores1, metricas1, "Comparativa de jugadores en defensa")
