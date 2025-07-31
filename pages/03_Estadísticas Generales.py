@@ -1,6 +1,8 @@
 import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt # type: ignore
+from math import pi
 
 def normalizar_por_90s(df):
     df = df.copy()
@@ -37,27 +39,40 @@ df_gk_2 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.st
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("Jugador 1")
+    jugadores1 = st.multiselect("Seleccioná métricas", options=df_attack["player"].unique().tolist(), default=None, key="jugadores1")
     metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics, default=None, key="metricas1")
     
     if not metricas1:
         st.info("Por favor seleccioná las métricas a considerar.")
+    elif not jugadores1:
+        st.info("Selecciona los jugadores a comparar.")
     else:
         jugador = 'Jugador 1'
-        valores = df_attack.loc[jugador, metricas1].values.tolist()
+        valores = df_attack.loc[jugadores1, metricas1]
         
-        fig = go.Figure()
-        fig.add_trace(go.Scatterpolar(
-            r=valores,
-            theta=[m.replace('_', ' ').capitalize() for m in metricas1],
-            fill='toself',
-            name=jugador
-        ))
-        fig.update_layout(
-            polar=dict(radialaxis=dict(visible=True)),
-            showlegend=True
-        )
-        st.plotly_chart(fig, use_container_width=True)
+        #for metrica in metricas:
+        #    min_val = df[metrica].min()
+        #    max_val = df[metrica].max()
+        #    data_norm[metrica] = 100 * (data[metrica] - min_val) / (max_val - min_val)
+
+        num_vars = len(metricas1)
+        angles = [n / float(num_vars) * 2 * pi for n in range(num_vars)]
+        angles += angles[:1]
+
+        fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+        
+        for i, row in valores.iterrows():
+            valores = row[metricas1].tolist()
+            valores += valores[:1]
+            ax.plot(angles, valores, label=row["player"])
+            ax.fill(angles, valores, alpha=0.1)
+
+        ax.set_xticks(angles[:-1])
+        ax.set_xticklabels([m.replace("_", " ").capitalize() for m in metricas1])
+        ax.set_title("Comparativa métricas de ataque", y=1.08)
+        ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
+
+        st.pyplot(fig)
 
 # ----- COLUMNA 2 -----
 with col2:
