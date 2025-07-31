@@ -8,7 +8,7 @@ def normalizar_por_90s(df):
     df = df.copy()
     columnas_a_normalizar = [
         col for col in df.columns
-        if not col.endswith("_90s") and not col.startswith("perc_") and col != "90s" and col != "player"
+        if not col.endswith("_90s") and not col.startswith("perc_") and col != "90s" and col != "player" and not col.endswith("_%") and not col.endswith("_perc")
     ]
 
     # Creamos nuevas columnas normalizadas por '90s'
@@ -62,14 +62,17 @@ df_defense = normalizar_por_90s(st.session_state.stats_players[(st.session_state
 df_gk_1 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_1])
 df_gk_2 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_2])
 
-
+attack_metrics_cleaned = ["goals_90s","assists_90s","goals_no_penalty_kicks_90s","xG_90s","xAG_90s","no_penalty_xG_90s","progressive_carries_90s","progressive_passes_90s","progressive_passes_received_90s","shot_creating_actions_90s","play_passes_to_shot_90s","goal_creating_actions_90s","play_passes_to_goal_90s","offsides_90s","passes_completed_90s","perc_passes_completed","shoots_on_target_90s","short_passes_completed_90s","perc_short_passes_completed","medium_passes_completed_90s","perc_medium_passes_completed","key_passes_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","switches_passes_90s","carries_into_ofe_third_90s","carries_into_penalty_area_90s","miscontrols_90s","passes_received_90s"]
+defense_metrics_cleaned = ["yellow_cards_90s","red_cards_90s","tackles_won_90s","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","perc_dribblers_tackled","blocks_90s","shots_blocked_90s","passes_blocked_90s","interceptions_90s","tackles_and_interceptions_90s","clearances_90s","errors_90s","second_yellow_card_expulsions_90s","fouls_commited_90s","aerial_duels_won_90s","perc_aerial_duels_won","penalty_kicks_conceded_90s"]
+goalkeeper_metrics_1_cleaned = ["goals_against_90s","shoots_on_target_against_90s","xG_post_shoot_90s","xG_post_shoot_over_shoot_on_target_90s","defensive_actions_outside_area_90s"]
+goalkeeper_metrics_2_cleaned = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
 
 
 col1, col2 = st.columns(2)
 
 with col1:
-    jugadores1 = st.multiselect("Seleccioná métricas", options=df_attack["player"].unique().tolist(), default=None, key="jugadores1")
-    metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics, default=None, key="metricas1")
+    jugadores1 = st.multiselect("Seleccioná jugadores", options=df_attack["player"].unique().tolist(), default=None, key="jugadores1")
+    metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics_cleaned, default=None, key="metricas1")
     
     if not metricas1:
         st.info("Por favor seleccioná las métricas a considerar.")
