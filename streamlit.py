@@ -1,6 +1,11 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+import base64
+from pathlib import Path
+
+# Ruta de la imagen relativa al archivo actual
+image_path = Path(__file__).parent / "img" / "sports.png"
 
 # Data
 
@@ -9,15 +14,31 @@ mapeo = pd.read_csv("data/prd/mapeo.csv",encoding="utf-8")
 
 # Establecer la configuración de la pantalla
 st.set_page_config(
-    page_title="Filtros",
+    page_title="Inicio",
     layout="wide"
 )
 
+# Codificar la imagen en base64
+with open(image_path, "rb") as img_file:
+    encoded_image = base64.b64encode(img_file.read()).decode()
 
-
-# Información
-st.sidebar.title('Análisis')
-st.sidebar.image('img/sports.png', width=150)
+# Mostrar imagen fija abajo del sidebar con HTML
+st.sidebar.markdown(
+    f"""
+    <style>
+        .sidebar-bottom {{
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }}
+    </style>
+    <div class="sidebar-bottom">
+        <img src="data:image/png;base64,{encoded_image}" width="100"/>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+#st.sidebar.image('img/sports.png', width=150)
 st.title('Recomendador de Jugadores')
 st.write('Seleccione los filtros para ver los jugadores que cumplan ese criterio')
 
