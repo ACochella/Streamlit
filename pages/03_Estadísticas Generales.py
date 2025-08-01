@@ -126,4 +126,4 @@ cols = st.columns(len(jugadores))
 for i, player in enumerate(jugadores):
     with cols[i]:
         st.subheader("Histórico de roles para " + player)
-        st.write(historico_categorias[historico_categorias["player"]==player])
+        st.write(historico_categorias[historico_categorias["player"]==player].set_index("player"))
