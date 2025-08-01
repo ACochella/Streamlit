@@ -118,24 +118,9 @@ with col2:
 historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","classification"]]
 historico_categorias["fecha"] = "202508"
 
-st.write(historico_categorias)
+cols = st.columns(len(jugadores))
 
-categorias = ["Mediocampista Goleador","Mediocampista Lector de Juego","Mediocampista Box to Box","Mediocampista Recuperador","Mediocampista Pasador","Mediocampista Enganche"]
-
-fig = px.line(
-    historico_categorias,
-    x="fecha",
-    y="classification",
-    color="player",
-    markers=True,
-    line_group="player"
-)
-
-fig.update_layout(
-    yaxis=dict(categoryorder='array', categoryarray=categorias),
-    title="Evolución de rol por jugador",
-    yaxis_title="Rol",
-    xaxis_title="Fecha"
-)
-
-st.plotly_chart(fig)
+for i, player in enumerate(jugadores):
+    with cols[i]:
+        st.subtitle("Histórico de roles para " + player)
+        st.write(historico_categorias[historico_categorias["player"]==player])
