@@ -21,7 +21,7 @@ def normalizar_por_90s(df):
         df[nueva_col] = round(df[col] / df["90s"],2)
 
     # Nos quedamos solo con columnas que terminan en '_90s' o empiezan con 'perc'
-    columnas_finales = [col for col in df.columns if col.endswith("_90s") or col.startswith("perc_") or col.startswith("player")]
+    columnas_finales = [col for col in df.columns if col.endswith("_90s") or col.startswith("perc_") or col.startswith("player") or col.endswith("_%") or col.endswith("_perc")]
     df_filtrado = df[columnas_finales].copy()
 
     return df_filtrado
