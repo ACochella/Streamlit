@@ -84,8 +84,8 @@ with col1:
             st.info("Por favor seleccioná las métricas a considerar.")
         elif not jugadores:
             st.info("Selecciona los jugadores a comparar.")
-
-        radar_chart(df_attack, jugadores, metricas1, "Comparativa de jugadores en ataque")
+        else:
+            radar_chart(df_attack, jugadores, metricas1, "Comparativa de jugadores en ataque")
     else:
         metricas1 = st.multiselect("Seleccioná métricas", options=goalkeeper_metrics_1_cleaned, default=None, key="metricas1")
         
@@ -93,8 +93,8 @@ with col1:
             st.info("Por favor seleccioná las métricas a considerar.")
         elif not jugadores:
             st.info("Selecciona los jugadores a comparar.")
-
-        radar_chart(df_gk_1, jugadores, metricas1, "Comparativa de arqueros")
+        else:
+            radar_chart(df_gk_1, jugadores, metricas1, "Comparativa de arqueros")
 
 
 with col2:
