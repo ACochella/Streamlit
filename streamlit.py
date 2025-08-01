@@ -35,3 +35,8 @@ valor_mercado = st.slider("Valor de mercado:", min_value=0, max_value=250,value=
 st.session_state.min_filtro = valor_mercado[0]
 
 st.session_state.max_filtro = valor_mercado[1]
+
+st.button("Ver resultados")
+
+if st.button("Ver resultados"):
+    st.experimental_set_query_params(pagina="Estadisticas Específicas")
