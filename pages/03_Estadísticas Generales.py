@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt # type: ignore
 from math import pi
 import plotly.express as px
 
+st.title("Comparativa de jugadores")
+st.subheader("Seleccione los jugadores que quiere comparar")
+
 def normalizar_por_90s(df):
     df = df.copy()
     columnas_a_normalizar = [
@@ -122,5 +125,5 @@ cols = st.columns(len(jugadores))
 
 for i, player in enumerate(jugadores):
     with cols[i]:
-        st.subtitle("Histórico de roles para " + player)
+        st.subheader("Histórico de roles para " + player)
         st.write(historico_categorias[historico_categorias["player"]==player])
