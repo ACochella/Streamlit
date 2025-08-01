@@ -120,6 +120,8 @@ historico_categorias["fecha"] = "202508"
 
 st.write(historico_categorias)
 
+categorias = ["Mediocampista Goleador","Mediocampista Lector de Juego","Mediocampista Box to Box","Mediocampista Recuperador","Mediocampista Pasador","Mediocampista Enganche"]
+
 fig = px.line(
     historico_categorias,
     x="fecha",
@@ -130,7 +132,7 @@ fig = px.line(
 )
 
 fig.update_layout(
-    yaxis=dict(categoryorder='array', categoryarray=st.session_state.role),
+    yaxis=dict(categoryorder='array', categoryarray=categorias),
     title="Evolución de rol por jugador",
     yaxis_title="Rol",
     xaxis_title="Fecha"
