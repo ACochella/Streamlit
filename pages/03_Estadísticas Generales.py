@@ -3,6 +3,7 @@ import streamlit as st
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt # type: ignore
 from math import pi
+import plotly.express as px
 
 def normalizar_por_90s(df):
     df = df.copy()
@@ -73,25 +74,66 @@ jugadores = st.multiselect("Seleccioná jugadores", options=df_attack["player"].
 col1, col2 = st.columns(2)
 
 with col1:
-    #jugadores1 = st.multiselect("Seleccioná jugadores", options=df_attack["player"].unique().tolist(), default=None, key="jugadores1")
-    metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics_cleaned, default=None, key="metricas1")
-    
-    if not metricas1:
-        st.info("Por favor seleccioná las métricas a considerar.")
-    elif not jugadores:
-        st.info("Selecciona los jugadores a comparar.")
+    if st.session_state.position != "Arquero":
+        metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics_cleaned, default=None, key="metricas1")
+        
+        if not metricas1:
+            st.info("Por favor seleccioná las métricas a considerar.")
+        elif not jugadores:
+            st.info("Selecciona los jugadores a comparar.")
 
-    radar_chart(df_attack, jugadores, metricas1, "Comparativa de jugadores en ataque")
+        radar_chart(df_attack, jugadores, metricas1, "Comparativa de jugadores en ataque")
+    else:
+        metricas1 = st.multiselect("Seleccioná métricas", options=goalkeeper_metrics_1_cleaned, default=None, key="metricas1")
+        
+        if not metricas1:
+            st.info("Por favor seleccioná las métricas a considerar.")
+        elif not jugadores:
+            st.info("Selecciona los jugadores a comparar.")
+
+        radar_chart(df_gk_1, jugadores, metricas1, "Comparativa de arqueros")
 
 
-# ----- COLUMNA 2 -----
 with col2:
-    #jugadores2 = st.multiselect("Seleccioná jugadores", options=df_defense["player"].unique().tolist(), default=None, key="jugadores2")
-    metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics_cleaned, default=None, key="metricas2")
-    
-    if not metricas2:
-        st.info("Por favor seleccioná las métricas a considerar.")
-    elif not jugadores:
-        st.info("Selecciona los jugadores a comparar.")
+    if st.session_state.position != "Arquero":
+        metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics_cleaned, default=None, key="metricas2")
+        
+        if not metricas2:
+            st.info("Por favor seleccioná las métricas a considerar.")
+        elif not jugadores:
+            st.info("Selecciona los jugadores a comparar.")
 
-    radar_chart(df_defense, jugadores, metricas2, "Comparativa de jugadores en defensa")
+        radar_chart(df_defense, jugadores, metricas2, "Comparativa de jugadores en defensa")
+    else:
+        metricas2 = st.multiselect("Seleccioná métricas", options=goalkeeper_metrics_2_cleaned, default=None, key="metricas2")
+        
+        if not metricas2:
+            st.info("Por favor seleccioná las métricas a considerar.")
+        elif not jugadores:
+            st.info("Selecciona los jugadores a comparar.")
+
+        radar_chart(df_gk_2, jugadores, metricas2, "Comparativa de arqueros")
+
+
+historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","role"]]
+historico_categorias["fecha"] = "202508"
+
+st.write(historico_categorias)
+
+fig = px.line(
+    historico_categorias,
+    x="fecha",
+    y="rol",
+    color="player",
+    markers=True,
+    line_group="player"
+)
+
+fig.update_layout(
+    yaxis=dict(categoryorder='array', categoryarray=st.session_state.role),
+    title="Evolución de rol por jugador",
+    yaxis_title="Rol",
+    xaxis_title="Fecha"
+)
+
+st.plotly_chart(fig)
