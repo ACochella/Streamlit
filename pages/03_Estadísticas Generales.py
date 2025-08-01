@@ -117,13 +117,15 @@ with col2:
 
         radar_chart(df_gk_2, jugadores, metricas2, "Comparativa de arqueros")
 
+if len(jugadores) > 0:
+    historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","classification"]]
+    historico_categorias["fecha"] = "202508"
 
-historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","classification"]]
-historico_categorias["fecha"] = "202508"
+    cols = st.columns(len(jugadores))
 
-cols = st.columns(len(jugadores))
-
-for i, player in enumerate(jugadores):
-    with cols[i]:
-        st.subheader("Histórico de roles para " + player)
-        st.write(historico_categorias[historico_categorias["player"]==player].set_index("player"))
+    for i, player in enumerate(jugadores):
+        with cols[i]:
+            st.subheader("Histórico de roles para " + player)
+            st.write(historico_categorias[historico_categorias["player"]==player].set_index("player"))
+else:
+    pass
