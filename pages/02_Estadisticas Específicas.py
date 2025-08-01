@@ -3,6 +3,32 @@ import streamlit as st
 import os
 import matplotlib.pyplot as plt # type: ignore
 import seaborn as sns # type: ignore
+import base64
+from pathlib import Path
+
+# Ruta de la imagen relativa al archivo actual
+image_path = Path(__file__).parent / "img" / "sports.png"
+
+# Codificar la imagen en base64
+with open(image_path, "rb") as img_file:
+    encoded_image = base64.b64encode(img_file.read()).decode()
+
+# Mostrar imagen fija abajo del sidebar con HTML
+st.sidebar.markdown(
+    f"""
+    <style>
+        .sidebar-bottom {{
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }}
+    </style>
+    <div class="sidebar-bottom">
+        <img src="data:image/png;base64,{encoded_image}" width="100"/>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # ------------------------
 # TITULOS
