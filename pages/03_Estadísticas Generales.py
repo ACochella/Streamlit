@@ -115,7 +115,7 @@ with col2:
         radar_chart(df_gk_2, jugadores, metricas2, "Comparativa de arqueros")
 
 
-historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","role"]]
+historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","classification"]]
 historico_categorias["fecha"] = "202508"
 
 st.write(historico_categorias)
@@ -123,7 +123,7 @@ st.write(historico_categorias)
 fig = px.line(
     historico_categorias,
     x="fecha",
-    y="rol",
+    y="classification",
     color="player",
     markers=True,
     line_group="player"
