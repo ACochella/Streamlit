@@ -7,7 +7,7 @@ import base64
 from pathlib import Path
 
 # Ruta de la imagen relativa al archivo actual
-image_path = Path(__file__).parent / "img" / "sports.png"
+image_path = Path(__file__).parent.parent / "img" / "sports.png"
 
 # Codificar la imagen en base64
 with open(image_path, "rb") as img_file:
