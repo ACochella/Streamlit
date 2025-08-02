@@ -80,77 +80,80 @@ def radar_chart(df, jugadores, metricas, titulo):
     # Mostrar en Streamlit
     st.pyplot(fig)
 
+if st.session_state.position is not None and st.session_state.role is not None:
 
-attack_metrics = ["goals_90s","assists_90s","goals_no_penalty_kicks_90s","xG_90s","xAG_90s","no_penalty_xG_90s","progressive_carries","progressive_passes","progressive_passes_received","shot_creating_actions_90s","play_passes_to_shot","goal_creating_actions_90s","play_passes_to_goal","offsides","passes_completed","perc_passes_completed","shoots_on_target_90s","short_passes_completed","perc_short_passes_completed","medium_passes_completed","perc_medium_passes_completed","key_passes","passes_into_final_third","passes_into_penalty_area","crosses_into_penalty_area","switches_passes","carries_into_ofe_third","carries_into_penalty_area","miscontrols","passes_received"]
-defense_metrics = ["yellow_cards","red_cards","tackles_won","tackles_defensive_third","tackles_middle_third","tackles_offensive_third","dribblers_tackled","perc_dribblers_tackled","blocks","shots_blocked","passes_blocked","interceptions","tackles_and_interceptions","clearances","errors","second_yellow_card_expulsions","fouls_commited","aerial_duels_won","perc_aerial_duels_won","penalty_kicks_conceded"]
-goalkeeper_metrics_1 = ["goals_against_90s","shoots_on_target_against","xG_post_shoot","xG_post_shoot_over_shoot_on_target","defensive_actions_outside_area_90s"]
-goalkeeper_metrics_2 = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
+    attack_metrics = ["goals_90s","assists_90s","goals_no_penalty_kicks_90s","xG_90s","xAG_90s","no_penalty_xG_90s","progressive_carries","progressive_passes","progressive_passes_received","shot_creating_actions_90s","play_passes_to_shot","goal_creating_actions_90s","play_passes_to_goal","offsides","passes_completed","perc_passes_completed","shoots_on_target_90s","short_passes_completed","perc_short_passes_completed","medium_passes_completed","perc_medium_passes_completed","key_passes","passes_into_final_third","passes_into_penalty_area","crosses_into_penalty_area","switches_passes","carries_into_ofe_third","carries_into_penalty_area","miscontrols","passes_received"]
+    defense_metrics = ["yellow_cards","red_cards","tackles_won","tackles_defensive_third","tackles_middle_third","tackles_offensive_third","dribblers_tackled","perc_dribblers_tackled","blocks","shots_blocked","passes_blocked","interceptions","tackles_and_interceptions","clearances","errors","second_yellow_card_expulsions","fouls_commited","aerial_duels_won","perc_aerial_duels_won","penalty_kicks_conceded"]
+    goalkeeper_metrics_1 = ["goals_against_90s","shoots_on_target_against","xG_post_shoot","xG_post_shoot_over_shoot_on_target","defensive_actions_outside_area_90s"]
+    goalkeeper_metrics_2 = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
 
-df_attack = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + attack_metrics])
-df_defense = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + defense_metrics])
-df_gk_1 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_1])
-df_gk_2 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_2])
+    df_attack = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + attack_metrics])
+    df_defense = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + defense_metrics])
+    df_gk_1 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_1])
+    df_gk_2 = normalizar_por_90s(st.session_state.stats_players[(st.session_state.stats_players["classification"] == st.session_state.position + " " +st.session_state.role) & (st.session_state.stats_players["market_value_millions"].between(st.session_state.min_filtro, st.session_state.max_filtro))][["player","90s"] + goalkeeper_metrics_2])
 
-attack_metrics_cleaned = ["goals_90s","assists_90s","goals_no_penalty_kicks_90s","xG_90s","xAG_90s","no_penalty_xG_90s","progressive_carries_90s","progressive_passes_90s","progressive_passes_received_90s","shot_creating_actions_90s","play_passes_to_shot_90s","goal_creating_actions_90s","play_passes_to_goal_90s","offsides_90s","passes_completed_90s","perc_passes_completed","shoots_on_target_90s","short_passes_completed_90s","perc_short_passes_completed","medium_passes_completed_90s","perc_medium_passes_completed","key_passes_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","switches_passes_90s","carries_into_ofe_third_90s","carries_into_penalty_area_90s","miscontrols_90s","passes_received_90s"]
-defense_metrics_cleaned = ["yellow_cards_90s","red_cards_90s","tackles_won_90s","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","perc_dribblers_tackled","blocks_90s","shots_blocked_90s","passes_blocked_90s","interceptions_90s","tackles_and_interceptions_90s","clearances_90s","errors_90s","second_yellow_card_expulsions_90s","fouls_commited_90s","aerial_duels_won_90s","perc_aerial_duels_won","penalty_kicks_conceded_90s"]
-goalkeeper_metrics_1_cleaned = ["goals_against_90s","shoots_on_target_against_90s","xG_post_shoot_90s","xG_post_shoot_over_shoot_on_target_90s","defensive_actions_outside_area_90s"]
-goalkeeper_metrics_2_cleaned = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
+    attack_metrics_cleaned = ["goals_90s","assists_90s","goals_no_penalty_kicks_90s","xG_90s","xAG_90s","no_penalty_xG_90s","progressive_carries_90s","progressive_passes_90s","progressive_passes_received_90s","shot_creating_actions_90s","play_passes_to_shot_90s","goal_creating_actions_90s","play_passes_to_goal_90s","offsides_90s","passes_completed_90s","perc_passes_completed","shoots_on_target_90s","short_passes_completed_90s","perc_short_passes_completed","medium_passes_completed_90s","perc_medium_passes_completed","key_passes_90s","passes_into_final_third_90s","passes_into_penalty_area_90s","crosses_into_penalty_area_90s","switches_passes_90s","carries_into_ofe_third_90s","carries_into_penalty_area_90s","miscontrols_90s","passes_received_90s"]
+    defense_metrics_cleaned = ["yellow_cards_90s","red_cards_90s","tackles_won_90s","tackles_defensive_third_90s","tackles_middle_third_90s","tackles_offensive_third_90s","dribblers_tackled_90s","perc_dribblers_tackled","blocks_90s","shots_blocked_90s","passes_blocked_90s","interceptions_90s","tackles_and_interceptions_90s","clearances_90s","errors_90s","second_yellow_card_expulsions_90s","fouls_commited_90s","aerial_duels_won_90s","perc_aerial_duels_won","penalty_kicks_conceded_90s"]
+    goalkeeper_metrics_1_cleaned = ["goals_against_90s","shoots_on_target_against_90s","xG_post_shoot_90s","xG_post_shoot_over_shoot_on_target_90s","defensive_actions_outside_area_90s"]
+    goalkeeper_metrics_2_cleaned = ["saves_perc","clean_sheets_%","penalty_saved_perc","perc_goal_kicks","perc_crosses_stopped"]
 
 
-jugadores = st.multiselect("Seleccioná jugadores", options=df_attack["player"].unique().tolist(), default=None, key="jugadores")
+    jugadores = st.multiselect("Seleccioná jugadores", options=df_attack["player"].unique().tolist(), default=None, key="jugadores")
 
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-with col1:
-    if st.session_state.position != "Arquero":
-        metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics_cleaned, default=None, key="metricas1")
-        
-        if not metricas1:
-            st.info("Por favor seleccioná las métricas a considerar.")
-        elif not jugadores:
-            st.info("Selecciona los jugadores a comparar.")
+    with col1:
+        if st.session_state.position != "Arquero":
+            metricas1 = st.multiselect("Seleccioná métricas", options=attack_metrics_cleaned, default=None, key="metricas1")
+            
+            if not metricas1:
+                st.info("Por favor seleccioná las métricas a considerar.")
+            elif not jugadores:
+                st.info("Selecciona los jugadores a comparar.")
+            else:
+                radar_chart(df_attack, jugadores, metricas1, "Comparativa de jugadores en ataque")
         else:
-            radar_chart(df_attack, jugadores, metricas1, "Comparativa de jugadores en ataque")
-    else:
-        metricas1 = st.multiselect("Seleccioná métricas", options=goalkeeper_metrics_1_cleaned, default=None, key="metricas1")
-        
-        if not metricas1:
-            st.info("Por favor seleccioná las métricas a considerar.")
-        elif not jugadores:
-            st.info("Selecciona los jugadores a comparar.")
+            metricas1 = st.multiselect("Seleccioná métricas", options=goalkeeper_metrics_1_cleaned, default=None, key="metricas1")
+            
+            if not metricas1:
+                st.info("Por favor seleccioná las métricas a considerar.")
+            elif not jugadores:
+                st.info("Selecciona los jugadores a comparar.")
+            else:
+                radar_chart(df_gk_1, jugadores, metricas1, "Comparativa de arqueros")
+
+
+    with col2:
+        if st.session_state.position != "Arquero":
+            metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics_cleaned, default=None, key="metricas2")
+            
+            if not metricas2:
+                st.info("Por favor seleccioná las métricas a considerar.")
+            elif not jugadores:
+                st.info("Selecciona los jugadores a comparar.")
+            else:
+                radar_chart(df_defense, jugadores, metricas2, "Comparativa de jugadores en defensa")
         else:
-            radar_chart(df_gk_1, jugadores, metricas1, "Comparativa de arqueros")
+            metricas2 = st.multiselect("Seleccioná métricas", options=goalkeeper_metrics_2_cleaned, default=None, key="metricas2")
+            
+            if not metricas2:
+                st.info("Por favor seleccioná las métricas a considerar.")
+            elif not jugadores:
+                st.info("Selecciona los jugadores a comparar.")
+            else:
+                radar_chart(df_gk_2, jugadores, metricas2, "Comparativa de arqueros")
 
+    if len(jugadores) > 0:
+        historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","classification"]]
+        historico_categorias["fecha"] = "202508"
 
-with col2:
-    if st.session_state.position != "Arquero":
-        metricas2 = st.multiselect("Seleccioná métricas", options=defense_metrics_cleaned, default=None, key="metricas2")
-        
-        if not metricas2:
-            st.info("Por favor seleccioná las métricas a considerar.")
-        elif not jugadores:
-            st.info("Selecciona los jugadores a comparar.")
+        cols = st.columns(len(jugadores))
 
-        radar_chart(df_defense, jugadores, metricas2, "Comparativa de jugadores en defensa")
+        for i, player in enumerate(jugadores):
+            with cols[i]:
+                st.subheader("Histórico de roles para " + player)
+                st.write(historico_categorias[historico_categorias["player"]==player].set_index("player"))
     else:
-        metricas2 = st.multiselect("Seleccioná métricas", options=goalkeeper_metrics_2_cleaned, default=None, key="metricas2")
-        
-        if not metricas2:
-            st.info("Por favor seleccioná las métricas a considerar.")
-        elif not jugadores:
-            st.info("Selecciona los jugadores a comparar.")
-
-        radar_chart(df_gk_2, jugadores, metricas2, "Comparativa de arqueros")
-
-if len(jugadores) > 0:
-    historico_categorias = st.session_state.stats_players[st.session_state.stats_players["player"].isin(jugadores)][["player","classification"]]
-    historico_categorias["fecha"] = "202508"
-
-    cols = st.columns(len(jugadores))
-
-    for i, player in enumerate(jugadores):
-        with cols[i]:
-            st.subheader("Histórico de roles para " + player)
-            st.write(historico_categorias[historico_categorias["player"]==player].set_index("player"))
+        pass
 else:
     pass
