@@ -161,4 +161,4 @@ if st.session_state.position is not None and st.session_state.role is not None:
     else:
         pass
 else:
-    st.write("No se seleccionó tipo de jugador")
+    pass
