@@ -80,12 +80,12 @@ def radar_chart(df, jugadores, metricas, titulo):
 st.title("Comparativa de jugadores")
 st.markdown("__________")
 
-if st.session_state.role is not None:
+if st.session_state.role is None or st.session_state.position is None:
     st.write("No se seleccionó tipo de jugador")
-else:
-    st.subheader("Seleccione los jugadores que quiere comparar")
 
 if st.session_state.position is not None and st.session_state.role is not None:
+    
+    st.subheader("Seleccione los jugadores que quiere comparar")
 
     attack_metrics = ["goals_90s","assists_90s","goals_no_penalty_kicks_90s","xG_90s","xAG_90s","no_penalty_xG_90s","progressive_carries","progressive_passes","progressive_passes_received","shot_creating_actions_90s","play_passes_to_shot","goal_creating_actions_90s","play_passes_to_goal","offsides","passes_completed","perc_passes_completed","shoots_on_target_90s","short_passes_completed","perc_short_passes_completed","medium_passes_completed","perc_medium_passes_completed","key_passes","passes_into_final_third","passes_into_penalty_area","crosses_into_penalty_area","switches_passes","carries_into_ofe_third","carries_into_penalty_area","miscontrols","passes_received"]
     defense_metrics = ["yellow_cards","red_cards","tackles_won","tackles_defensive_third","tackles_middle_third","tackles_offensive_third","dribblers_tackled","perc_dribblers_tackled","blocks","shots_blocked","passes_blocked","interceptions","tackles_and_interceptions","clearances","errors","second_yellow_card_expulsions","fouls_commited","aerial_duels_won","perc_aerial_duels_won","penalty_kicks_conceded"]
