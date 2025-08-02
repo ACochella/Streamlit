@@ -30,9 +30,6 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-st.title("Comparativa de jugadores")
-st.subheader("Seleccione los jugadores que quiere comparar")
-
 def normalizar_por_90s(df):
     df = df.copy()
     columnas_a_normalizar = [
@@ -79,6 +76,14 @@ def radar_chart(df, jugadores, metricas, titulo):
 
     # Mostrar en Streamlit
     st.pyplot(fig)
+
+st.title("Comparativa de jugadores")
+st.markdown("__________")
+
+if st.session_state.role is not None:
+    st.write("No se seleccionó tipo de jugador")
+else:
+    st.subheader("Seleccione los jugadores que quiere comparar")
 
 if st.session_state.position is not None and st.session_state.role is not None:
 
@@ -156,4 +161,4 @@ if st.session_state.position is not None and st.session_state.role is not None:
     else:
         pass
 else:
-    pass
+    st.write("No se seleccionó tipo de jugador")
