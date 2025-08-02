@@ -30,10 +30,8 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-# ------------------------
-# TITULOS
-# ------------------------
-st.title("Estadisticas de los jugadores en cada rol")
+
+st.title("Estadísticas de los jugadores en cada rol")
 st.markdown("__________")
 
 
