@@ -41,7 +41,7 @@ st.sidebar.markdown(
 
 st.title('Recomendador de Jugadores')
 
-st.markdown("#### Descubre, compara y analiza futbolistas con una visión integral basada en datos. Esta herramienta te permite identificar perfiles y roles para cada jugador,  además de evaluar métricas diferenciales que explican su rendimiento. Ideal para encontrar el tipo de jugador que tu club necesita incorporar.")
+st.write("Descubre, compara y analiza futbolistas con una visión integral basada en datos. Esta herramienta te permite identificar perfiles y roles para cada jugador,  además de evaluar métricas diferenciales que explican su rendimiento. Ideal para encontrar el tipo de jugador que tu club necesita incorporar.")
 st.subheader("Filtros")
 st.write('Seleccione los filtros para ver los jugadores que cumplan esos criterios')
 
