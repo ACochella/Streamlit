@@ -43,7 +43,7 @@ st.title('Recomendador de Jugadores')
 
 st.write("Descubre, compara y analiza futbolistas con una visión integral basada en datos. Esta herramienta te permite identificar perfiles y roles para cada jugador,  además de evaluar métricas diferenciales que explican su rendimiento. Ideal para encontrar el tipo de jugador que tu club necesita incorporar.")
 st.subheader("Filtros")
-st.write('Seleccione los filtros para ver los jugadores que cumplan esos criterios')
+st.write('Seleccione los filtros para ver los jugadores que cumplan esos criterios. Una vez hecha la selección ve a la página **Estadísticas Específicas** para comenzar el análisis')
 
 position = st.selectbox("Elige la posición:", mapeo["position"].unique().tolist(),index=None)
 
