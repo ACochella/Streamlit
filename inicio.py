@@ -55,7 +55,12 @@ st.session_state.role = role
 
 valor_mercado = st.slider("Valor de mercado:", min_value=0, max_value=250,value=(0, 250))
 
-# Extraer los límites del rango seleccionado por el usuario
-st.session_state.min_filtro = valor_mercado[0]
+st.session_state.min_valor_mercado = valor_mercado[0]
 
-st.session_state.max_filtro = valor_mercado[1]
+st.session_state.max_valor_mercado = valor_mercado[1]
+
+edad = st.slider("Edad:", min_value=15, max_value=50,value=(15, 50))
+
+st.session_state.min_edad = edad[0]
+
+st.session_state.max_edad = edad[1]
