@@ -133,6 +133,8 @@ if st.session_state.position is not None and st.session_state.role is not None:
 
     with col1:
         if jugador is not None:
+            with st.expander("¿Qué muestran estos gráficos?"):
+                st.write("Que sos puto")
             valores = percentiles.loc[[jugador]]
 
             metricas_posibles = percentiles.columns.tolist()
