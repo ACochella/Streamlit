@@ -133,8 +133,6 @@ if st.session_state.position is not None and st.session_state.role is not None:
 
     with col1:
         if jugador is not None:
-            with st.expander("¿Qué muestran estos gráficos?"):
-                st.write("Que sos puto")
             valores = percentiles.loc[[jugador]]
 
             metricas_posibles = percentiles.columns.tolist()
@@ -146,6 +144,8 @@ if st.session_state.position is not None and st.session_state.role is not None:
                     metricas_destacadas.append(metrica)
             # Gráfico solo si hay métricas destacadas
             if metricas_destacadas:
+                with st.expander("¿Qué muestran estos gráficos?"):
+                    st.write("Que sos puto")
                 fig, axes = plt.subplots(nrows=len(metricas_destacadas), figsize=(6, 4 * len(metricas_destacadas)))
 
                 if len(metricas_destacadas) == 1:
