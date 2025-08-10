@@ -155,6 +155,7 @@ if st.session_state.position is not None and st.session_state.role is not None:
                     - **Máximo**: valor más alto excluyendo los outliers (tope de la línea).
 
                     Además, muestra los **outliers** (valores atípicos por fuera de las lineas) como puntos individuales, lo que facilita detectar variabilidad y posibles anomalías.
+                    
                     En este caso, el valor de esa métrica para el jugador seleccionado se muestra con un punto rojo para distinguirlo.
                     """)
                 fig, axes = plt.subplots(nrows=len(metricas_destacadas), figsize=(6, 4 * len(metricas_destacadas)))
@@ -196,7 +197,7 @@ if st.session_state.position is not None and st.session_state.role is not None:
             valores.plot(kind='bar', color=colores, edgecolor='black', ax=ax)
             ax.set_title(f"Percentiles de {jugador}")
             ax.set_ylabel("Percentil")
-            ax.set_ylim(0, 100)
+            ax.set_ylim(0, 115)
             ax.grid(axis='y', linestyle='--', alpha=0.7)
             ax.set_xticklabels(valores.index, rotation=90)
 
