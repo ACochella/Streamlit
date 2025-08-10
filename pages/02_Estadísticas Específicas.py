@@ -145,7 +145,18 @@ if st.session_state.position is not None and st.session_state.role is not None:
             # Gráfico solo si hay métricas destacadas
             if metricas_destacadas:
                 with st.expander("¿Qué muestran estos gráficos?"):
-                    st.write("Que sos puto")
+                    st.write("""
+                    Un **box plot o diagrama de caja** es una representación gráfica que resume la distribución de un conjunto de datos mediante cinco medidas clave:
+
+                    - **Mínimo**: valor más bajo excluyendo los outliers (base de la línea).
+                    - **Primer cuartil (Q1)**: valor que deja al 25% de los datos por debajo.
+                    - **Mediana (Q2)**: valor central que divide a los datos en dos partes iguales.
+                    - **Tercer cuartil (Q3)**: valor que deja al 75% de los datos por debajo.
+                    - **Máximo**: valor más alto excluyendo los outliers (tope de la línea).
+
+                    Además, muestra los **outliers** (valores atípicos por fuera de las lineas) como puntos individuales, lo que facilita detectar variabilidad y posibles anomalías.
+                    En este caso, el valor de esa métrica para el jugador seleccionado se muestra con un punto rojo para distinguirlo.
+                    """)
                 fig, axes = plt.subplots(nrows=len(metricas_destacadas), figsize=(6, 4 * len(metricas_destacadas)))
 
                 if len(metricas_destacadas) == 1:
